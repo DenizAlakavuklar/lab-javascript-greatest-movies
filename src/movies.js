@@ -24,8 +24,8 @@ function howManyMovies(moviesArray) {
 
 function scoresAverage(moviesArray) {
     if (moviesArray.length !== 0) {
-                
-        let sum = moviesArray.filter((element) => element.score ).reduce(function (value, moviesArray) {
+
+        let sum = moviesArray.filter((element) => element.score).reduce(function (value, moviesArray) {
             return value + moviesArray.score;
         }, 0);
         return Math.round((sum / moviesArray.length) * 100) / 100
@@ -36,17 +36,64 @@ function scoresAverage(moviesArray) {
 // console.log (scoresAverage(movies))
 
 
-
-
-
 // Iteration 4: Drama movies - Get the average of Drama Movies
-function dramaMoviesScore(moviesArray) { }
+
+function dramaMoviesScore(moviesArray) {
+    if (moviesArray.length !== 0) {
+        const newArr = moviesArray.filter((movie) => { return movie.genre.includes('Drama') })
+        let sum = newArr.reduce(function (value, newArr) {
+            return value + newArr.score;
+        }, 0)
+        return Math.round((sum / newArr.length) * 100) / 100;
+    }
+    else {return 0} }
+
+
+//console.log (dramaMoviesScore(movies))
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-function orderByYear(moviesArray) { }
+
+function orderByYear(moviesArray) {
+    const copymoviesArr= [...moviesArray];
+    return copymoviesArr.sort((a, b) => {
+      if (a.year > b.year) {
+        return 1;
+      } else if (a.year < b.year) {
+        return -1;
+      } else {
+        const firstMovieTitle = a.title.toLowerCase();
+        const secondMovieTitle = b.title.toLowerCase();
+        if (firstMovieTitle > secondMovieTitle) {
+          return 1;
+        } else if (firstMovieTitle < secondMovieTitle) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }
+    });
+  }
+//console.log (orderByYear(movies) )
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically(moviesArray) { }
+
+function orderAlphabetically(moviesArray) {
+    return moviesArray
+      .map(movie => movie.title)
+      .sort((a, b) => {
+        const firstMovieTitle = a.toLowerCase();
+        const secondMovieTitle = b.toLowerCase();
+        if (firstMovieTitle > secondMovieTitle) {
+          return 1;
+        } else if (firstMovieTitle < secondMovieTitle) {
+          return -1;
+        } else {
+          return 0;
+        }
+      })
+      .slice(0, 20);
+  }
+//console.log (orderAlphabetically(movies) )
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes(moviesArray) { }
